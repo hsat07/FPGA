@@ -1,0 +1,195 @@
+$date
+	Sat Aug  1 20:02:17 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module logic_tb $end
+$var wire 8 ! C_xor [7:0] $end
+$var wire 8 " C_or [7:0] $end
+$var wire 8 # C_and [7:0] $end
+$var reg 8 $ A [7:0] $end
+$var reg 8 % B [7:0] $end
+$scope module g1 $end
+$var wire 8 & A [7:0] $end
+$var wire 8 ' B [7:0] $end
+$var wire 8 ( C [7:0] $end
+$scope begin andStage[0] $end
+$var parameter 2 ) i $end
+$upscope $end
+$scope begin andStage[1] $end
+$var parameter 2 * i $end
+$upscope $end
+$scope begin andStage[2] $end
+$var parameter 3 + i $end
+$upscope $end
+$scope begin andStage[3] $end
+$var parameter 3 , i $end
+$upscope $end
+$scope begin andStage[4] $end
+$var parameter 4 - i $end
+$upscope $end
+$scope begin andStage[5] $end
+$var parameter 4 . i $end
+$upscope $end
+$scope begin andStage[6] $end
+$var parameter 4 / i $end
+$upscope $end
+$scope begin andStage[7] $end
+$var parameter 4 0 i $end
+$upscope $end
+$upscope $end
+$scope module g2 $end
+$var wire 8 1 A [7:0] $end
+$var wire 8 2 B [7:0] $end
+$var wire 8 3 C [7:0] $end
+$scope begin orStage[0] $end
+$var parameter 2 4 i $end
+$upscope $end
+$scope begin orStage[1] $end
+$var parameter 2 5 i $end
+$upscope $end
+$scope begin orStage[2] $end
+$var parameter 3 6 i $end
+$upscope $end
+$scope begin orStage[3] $end
+$var parameter 3 7 i $end
+$upscope $end
+$scope begin orStage[4] $end
+$var parameter 4 8 i $end
+$upscope $end
+$scope begin orStage[5] $end
+$var parameter 4 9 i $end
+$upscope $end
+$scope begin orStage[6] $end
+$var parameter 4 : i $end
+$upscope $end
+$scope begin orStage[7] $end
+$var parameter 4 ; i $end
+$upscope $end
+$upscope $end
+$scope module g3 $end
+$var wire 8 < A [7:0] $end
+$var wire 8 = B [7:0] $end
+$var wire 8 > C [7:0] $end
+$scope begin xorStage[0] $end
+$var parameter 2 ? i $end
+$upscope $end
+$scope begin xorStage[1] $end
+$var parameter 2 @ i $end
+$upscope $end
+$scope begin xorStage[2] $end
+$var parameter 3 A i $end
+$upscope $end
+$scope begin xorStage[3] $end
+$var parameter 3 B i $end
+$upscope $end
+$scope begin xorStage[4] $end
+$var parameter 4 C i $end
+$upscope $end
+$scope begin xorStage[5] $end
+$var parameter 4 D i $end
+$upscope $end
+$scope begin xorStage[6] $end
+$var parameter 4 E i $end
+$upscope $end
+$scope begin xorStage[7] $end
+$var parameter 4 F i $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b111 F
+b110 E
+b101 D
+b100 C
+b11 B
+b10 A
+b1 @
+b0 ?
+b111 ;
+b110 :
+b101 9
+b100 8
+b11 7
+b10 6
+b1 5
+b0 4
+b111 0
+b110 /
+b101 .
+b100 -
+b11 ,
+b10 +
+b1 *
+b0 )
+$end
+#0
+$dumpvars
+b0 >
+b0 =
+b0 <
+b0 3
+b0 2
+b0 1
+b0 (
+b0 '
+b0 &
+b0 %
+b0 $
+b0 #
+b0 "
+b0 !
+$end
+#10000
+b11111111 "
+b11111111 3
+b11111111 !
+b11111111 >
+b11111111 $
+b11111111 &
+b11111111 1
+b11111111 <
+#20000
+b11111111 #
+b11111111 (
+b0 !
+b0 >
+b11111111 %
+b11111111 '
+b11111111 2
+b11111111 =
+#30000
+b0 #
+b0 (
+b11111111 !
+b11111111 >
+b1010101 %
+b1010101 '
+b1010101 2
+b1010101 =
+b10101010 $
+b10101010 &
+b10101010 1
+b10101010 <
+#40000
+b10001000 #
+b10001000 (
+b11101110 "
+b11101110 3
+b1100110 !
+b1100110 >
+b10101010 %
+b10101010 '
+b10101010 2
+b10101010 =
+b11001100 $
+b11001100 &
+b11001100 1
+b11001100 <
+#50000
