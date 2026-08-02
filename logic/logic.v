@@ -36,3 +36,4 @@ module invertGate(input [7:0] B, input sub, output [7:0]B_mod);
         end
     endgenerate
 endmodule
+
