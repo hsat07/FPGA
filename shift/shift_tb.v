@@ -1,56 +1,55 @@
 `timescale 1ns/1ps
 
 module shift_tb;
-    reg  [7:0] A;
-    reg  [3:0] shiftVal;
-    reg  [1:0] shiftOPC;
-    reg        flagC;
-    wire [7:0] A_mod;
-    wire       flagCNew;
+    reg  [15:0] IN;
+    reg  [3:0]  SCNT;
+    reg  [1:0]  SHIFTOPC;
+    reg         SFTIN;
+    wire [15:0] OUT;
+    wire        SFTOUT;
 
     shift uut (
-        .A(A),
-        .shiftVal(shiftVal),
-        .shiftOPC(shiftOPC),
-        .flagC(flagC),
-        .A_mod(A_mod),
-        .flagCNew(flagCNew)
+        .IN(IN),
+        .SCNT(SCNT),
+        .SHIFTOPC(SHIFTOPC),
+        .SFTIN(SFTIN),
+        .OUT(OUT),
+        .SFTOUT(SFTOUT)
     );
 
     initial begin
         $dumpfile("dump_shift.vcd");
         $dumpvars(0, shift_tb);
 
-        $display("      A     SHIFTVAL OPC |    A_mod   flagCNew");
-        $display("--------------------------------------------------");
+        $display("         IN          SCNT OPC SFTIN |        OUT       SFTOUT");
+        $display("--------------------------------------------------------------------");
 
-        // LSL tests (OPC = 00)
-        A = 8'b0000_1011; shiftVal = 4'b0000; shiftOPC = 2'b00; flagC = 1'b0; #10;
-        $display("%b  %b     %b  |  %b     %b", A, shiftVal, shiftOPC, A_mod, flagCNew);
+        IN = 16'b0000_0000_0000_1011; SCNT = 4'b0000; SHIFTOPC = 2'b00; SFTIN = 1'b0; #10;
+        $display("%b  %b  %b   %b  |  %b  %b", IN, SCNT, SHIFTOPC, SFTIN, OUT, SFTOUT);
 
-        A = 8'b0000_1011; shiftVal = 4'b0010; shiftOPC = 2'b00; flagC = 1'b0; #10;
-        $display("%b  %b     %b  |  %b     %b", A, shiftVal, shiftOPC, A_mod, flagCNew);
+        IN = 16'b0000_0000_0000_1011; SCNT = 4'b0010; SHIFTOPC = 2'b00; SFTIN = 1'b0; #10;
+        $display("%b  %b  %b   %b  |  %b  %b", IN, SCNT, SHIFTOPC, SFTIN, OUT, SFTOUT);
 
-        A = 8'b1111_1111; shiftVal = 4'b1000; shiftOPC = 2'b00; flagC = 1'b0; #10;
-        $display("%b  %b     %b  |  %b     %b", A, shiftVal, shiftOPC, A_mod, flagCNew);
+        IN = 16'b1111_1111_1111_1111; SCNT = 4'b1000; SHIFTOPC = 2'b00; SFTIN = 1'b0; #10;
+        $display("%b  %b  %b   %b  |  %b  %b", IN, SCNT, SHIFTOPC, SFTIN, OUT, SFTOUT);
 
-        // LSR tests (OPC = 01)
-        A = 8'b1000_0000; shiftVal = 4'b0001; shiftOPC = 2'b01; flagC = 1'b0; #10;
-        $display("%b  %b     %b  |  %b     %b", A, shiftVal, shiftOPC, A_mod, flagCNew);
+        IN = 16'b1000_0000_0000_0000; SCNT = 4'b0001; SHIFTOPC = 2'b01; SFTIN = 1'b0; #10;
+        $display("%b  %b  %b   %b  |  %b  %b", IN, SCNT, SHIFTOPC, SFTIN, OUT, SFTOUT);
 
-        A = 8'b1111_1111; shiftVal = 4'b0100; shiftOPC = 2'b01; flagC = 1'b0; #10;
-        $display("%b  %b     %b  |  %b     %b", A, shiftVal, shiftOPC, A_mod, flagCNew);
+        IN = 16'b1111_1111_1111_1111; SCNT = 4'b0100; SHIFTOPC = 2'b01; SFTIN = 1'b0; #10;
+        $display("%b  %b  %b   %b  |  %b  %b", IN, SCNT, SHIFTOPC, SFTIN, OUT, SFTOUT);
 
-        // ASR tests (OPC = 10)
-        A = 8'b1000_0000; shiftVal = 4'b0001; shiftOPC = 2'b10; flagC = 1'b0; #10;
-        $display("%b  %b     %b  |  %b     %b", A, shiftVal, shiftOPC, A_mod, flagCNew);
+        IN = 16'b1000_0000_0000_0000; SCNT = 4'b0001; SHIFTOPC = 2'b10; SFTIN = 1'b0; #10;
+        $display("%b  %b  %b   %b  |  %b  %b", IN, SCNT, SHIFTOPC, SFTIN, OUT, SFTOUT);
 
-        A = 8'b0111_1111; shiftVal = 4'b0011; shiftOPC = 2'b10; flagC = 1'b0; #10;
-        $display("%b  %b     %b  |  %b     %b", A, shiftVal, shiftOPC, A_mod, flagCNew);
+        IN = 16'b0111_1111_1111_1111; SCNT = 4'b0011; SHIFTOPC = 2'b10; SFTIN = 1'b0; #10;
+        $display("%b  %b  %b   %b  |  %b  %b", IN, SCNT, SHIFTOPC, SFTIN, OUT, SFTOUT);
 
-        // Unused/default case (OPC = 11)
-        A = 8'b1010_1010; shiftVal = 4'b0011; shiftOPC = 2'b11; flagC = 1'b0; #10;
-        $display("%b  %b     %b  |  %b     %b", A, shiftVal, shiftOPC, A_mod, flagCNew);
+        IN = 16'b1010_1010_1010_1010; SCNT = 4'b0011; SHIFTOPC = 2'b11; SFTIN = 1'b1; #10;
+        $display("%b  %b  %b   %b  |  %b  %b", IN, SCNT, SHIFTOPC, SFTIN, OUT, SFTOUT);
+
+        IN = 16'b1010_1010_1010_1010; SCNT = 4'b0000; SHIFTOPC = 2'b11; SFTIN = 1'b1; #10;
+        $display("%b  %b  %b   %b  |  %b  %b", IN, SCNT, SHIFTOPC, SFTIN, OUT, SFTOUT);
 
         $finish;
     end
