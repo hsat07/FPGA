@@ -111,7 +111,8 @@ module alu(
     input  [1:0]  SHIFTOPC,
     input  [3:0]  flagsIn,
     output [15:0] result,
-    output [3:0]  flagsOut,
+    output        flagC,
+    output        flagV,
     output        busy,
     output        done
 );
@@ -161,38 +162,32 @@ module alu(
     wire flagV_comb;
     assign flagV_comb = addSubV;
 
-    // ---- Z/N, generic from result_comb ----
-    wire flagZ_comb, flagN_comb;
-    assign flagZ_comb = (result_comb == 16'b0);
-    assign flagN_comb = result_comb[15];
-
-    // ---- Flag packing: {N, Z, C, V} ----
-    wire [3:0] flags_comb;
-    assign flags_comb = {flagN_comb, flagZ_comb, flagC_comb, flagV_comb};
-
     // ---- Sequential shell ----
     reg [15:0] result_reg;
-    reg [3:0]  flags_reg;
+    reg        flagC_reg, flagV_reg;
     reg        done_reg;
 
     always @(posedge clk) begin
         if (reset) begin
             result_reg <= 16'b0;
-            flags_reg  <= 4'b0;
+            flagC_reg  <= 1'b0;
+            flagV_reg  <= 1'b0;
             done_reg   <= 1'b0;
         end else begin
             done_reg <= start;
             if (start) begin
-                flags_reg <= flags_comb;
+                flagC_reg <= flagC_comb;
+                flagV_reg <= flagV_comb;
                 if (ALUOPC != 3'b110)   // CMP: skip result write, flags still update
                     result_reg <= result_comb;
             end
         end
     end
 
-    assign result   = result_reg;
-    assign flagsOut = flags_reg;
-    assign busy     = 1'b0;
-    assign done     = done_reg;
+    assign result = result_reg;
+    assign flagC  = flagC_reg;
+    assign flagV  = flagV_reg;
+    assign busy   = 1'b0;
+    assign done   = done_reg;
 
 endmodule
